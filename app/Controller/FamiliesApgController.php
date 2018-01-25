@@ -24,15 +24,20 @@ class FamiliesApgController extends AppController {
         'Eip.Eip'
     );
     
-    public function index($id = '', $parent = '') {
+    public function index() {
         $data = $this->FamilyApg->find('all', array(
             'order' => 'FamilyApg.name',
             'recursive' => -1
         ));
-        if (!empty($parent)) {
-            $this->set(cmpact('parent'));
-        }
         $this->set(compact('data'));
+    }
+    
+    public function detail($id) {
+        if ($id == null) {
+            throw new InvalidArgumentException("Empty id");
+        }
+        $result = $this->FamilyApg->findById($id);
+        $this->set(compact('result'));
     }
     
 }
