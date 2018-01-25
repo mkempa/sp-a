@@ -35,7 +35,7 @@ foreach ($accepted_list as $key => $val) {
     <table class="table table-bordered table-condensed table-responsive">
         <tr>
             <td class="col-xs-4"><?php echo __('Family APG-4'); ?></td>
-            <td><?php echo Hash::get($result, 'Genus.FamilyApg.name'); //echo $this->Edit->eipInput($result, 'Genus.id_family_apg', array('editable' => $authorizedEdit, 'type' => 'select', 'source' => $familiesApg, 'display' => Hash::get($result, 'Genus.FamilyApg.name'))); ?></td>
+            <td><?php echo Hash::get($result, 'Genus.FamilyApg.name'); ?></td>
         </tr>
         <tr>
             <td class="col-xs-4"><?php echo __('Family'); ?></td>
@@ -54,9 +54,9 @@ foreach ($accepted_list as $key => $val) {
                 'viewSelect' => true,
                 'viewUrl' => $this->Html->url(array(
                     'controller' => 'genera', 
-                    'action' => 'index', 
-                    'id' => Hash::get($result, 'Nomenclature.id_genus'), 
-                    'parent' => Hash::get($result, 'Nomenclature.id')))
+                    'action' => 'detail', 
+                    Hash::get($result, 'Nomenclature.id_genus'), 
+                    'record' => Hash::get($result, 'Nomenclature.id')))
                 )); ?> </td>
         </tr>
         <tr>
