@@ -19,7 +19,6 @@
         <table class="table table-striped table-bordered table-condensed table-responsive">
             <tr>
                 <th>ID</th>
-                <th></th>
                 <th><?php echo __('Name'); ?></th>
                 <th><?php echo __('Authors'); ?></th>
                 <th><?php echo __('Vernacular'); ?></th>
@@ -28,15 +27,9 @@
             </tr>
 
             <?php
-            foreach ($data as $d) :
-                $active = '';
-                if (!empty($this->params['pass'])) {
-                    $active = $this->Format->checkClass(Hash::get($d, 'Genus.id'), $this->params['pass'][0], 'emph');
-                }
-                ?>
-                <tr class="<?php echo $active; ?>">
+            foreach ($data as $d) : ?>
+                <tr>
                     <td><?php echo Hash::get($d, 'Genus.id'); ?></td>
-                    <td><?php echo!empty($active) ? $this->Html->link('Back', $back, array('class' => 'btn btn-default btn-xs')) : ''; //if the row is emphasized, provide back button  ?></td>
                     <td><?php echo $this->Edit->eipInput($d, 'Genus.name', array('editable' => $authorizedEdit)); ?></td>
                     <td><?php echo $this->Edit->eipInput($d, 'Genus.authors', array('editable' => $authorizedEdit)); ?></td>
                     <td><?php echo $this->Edit->eipInput($d, 'Genus.vernacular', array('editable' => $authorizedEdit)); ?></td>

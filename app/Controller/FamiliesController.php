@@ -24,15 +24,20 @@ class FamiliesController extends AppController {
         'Eip.Eip'
     );
     
-    public function index($id = '') {
+    public function index() {
         $data = $this->Family->find('all', array(
             'order' => 'Family.name',
             'recursive' => -1
         ));
-        if (!empty($id)) {
-            $this->set('back', $this->referer());
-        }
         $this->set(compact('data'));
+    }
+    
+    public function detail($id) {
+        if ($id == null) {
+            throw new InvalidArgumentException("Empty id");
+        }
+        $result = $this->Family->findById($id);
+        $this->set(compact('result'));
     }
     
 }
