@@ -64,7 +64,10 @@ class AppController extends Controller {
     
     public function isAuthorized($user) {
         // Admin can access every action
-        if (isset($user['role']) && $user['role'] == ADMIN) {
+        if (empty($user['role'])) {
+            throw new InvalidArgumentException('User role is not set!');
+        }
+        if ($user['role'] == ADMIN) {
             return true;
         }
         // Default deny
