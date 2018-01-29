@@ -29,7 +29,7 @@ class GeneraController extends AppController {
         'Utils'
     );
     
-    public function index($id = '', $parent = '') {
+    public function index() {
         $this->Paginator->settings = array(
             'Genus' => array(
                 'limit' => 50,
@@ -43,10 +43,23 @@ class GeneraController extends AppController {
         ));
         $familiesApg = $this->FamilyApg->listFamilies();
         $families = $this->Family->listFamilies();
-        if (!empty($id)) {
-            $this->set('back', $this->referer());
-        }
         $this->set(compact('data', 'families', 'familiesApg'));
     }
 
+    public function detail($id) {
+        if ($id == null) {
+            throw new InvalidArgumentException("Empty id");
+        }
+        $result = $this->Genus->find('first', array(
+            'contain' => array(
+                'Family',
+                'FamilyApg'
+            ),
+            'conditions' => array('Genus.id' => $id)
+        ));
+        $familiesApg = $this->FamilyApg->listFamilies();
+        $families = $this->Family->listFamilies();
+        $this->set(compact('result', 'families', 'familiesApg'));
+    }
+    
 }
