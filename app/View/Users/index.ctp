@@ -1,6 +1,4 @@
 <?php
-new dBug($users);
-
 $roles = array(ADMIN, EDITOR, AUTHOR);
 ?>
 
@@ -19,7 +17,7 @@ $roles = array(ADMIN, EDITOR, AUTHOR);
             <?php foreach ($users as $u) : ?>
                 <tr>
                     <td><?php echo Hash::get($u, 'User.id'); ?></td>
-                    <td><?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $u['User']['id']), array('title' => __('Edit'))); ?></td>
+                    <td><?php echo $this->Html->link(__('Edit'), array('action' => 'detail', $u['User']['id']), array('title' => __('Edit'))); ?></td>
                     <td><?php echo Hash::get($u, 'User.username'); ?></td>
                     <td><?php echo $this->Edit->eipInput($u, 'User.name'); ?></td>
                     <td><?php

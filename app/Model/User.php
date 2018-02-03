@@ -22,6 +22,7 @@ class User extends AppModel {
             'joinTable' => 'users_genera',
             'foreignKey' => 'id_user',
             'associationForeignKey' => 'id_genus',
+            'order' => 'Genera.name',
             'unique' => true
         )
     );

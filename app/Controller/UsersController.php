@@ -14,7 +14,7 @@ App::uses('AppController', 'Controller');
  */
 class UsersController extends AppController {
 
-    public $uses = array('User');
+    public $uses = array('Genus', 'User', 'UsersGenera');
     public $helpers = array(
         'Eip.Eip',
         'Edit'
@@ -33,9 +33,27 @@ class UsersController extends AppController {
         $this->set(compact('users'));
     }
 
+    public function detail($id) {
+        if (empty($id)) {
+            throw new InvalidArgumentException('Id must not be empty!');
+        }
+        $record = $this->User->findById($id);
+        $genera = $this->Genus->listGenera();
+        $this->set(compact('genera', 'record'));
+    }
+    
+    public function remove($genera = null) {
+        if ($genera == null) {
+            //get array of genera
+        }
+        $this->UsersGenera->delete(array('UsersGenera.id' => $genera), false);
+        $this->redirect(array('action' => 'detail'));
+    }
+    
     private function _add() {
         $user['User'] = array('username' => 'author', 'password' => 'auth', 'name' => 'Author', 'role' => AUTHOR);
         $this->User->save($user);
     }
     
 }
+ 
