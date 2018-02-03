@@ -65,8 +65,11 @@
                             <li<?php echo $ctrl == 'families' ? $active : ''; ?>><?php echo $this->Html->link(__('Families'), array('controller' => 'families', 'action' => 'index')); ?></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
+                            <?php if ($authorizedEdit === true): ?>
+                                <li><?php echo $this->Html->link(__('Users'), array('controller' => 'users', 'action' => 'index')); ?></li>
+                            <?php endif; ?>
                             <li><?php echo $this->Html->link($logged['name'], array('#')); ?></li>
-                            <li><?php echo $this->Html->link('<span class="glyphicon glyphicon-log-out"></span> Logout', array('controller' => 'users', 'action' => 'logout'), array('escape' => false)); ?></li>
+                            <li><?php echo $this->Html->link('<span class="glyphicon glyphicon-log-out"></span> Logout', array('controller' => 'authorize', 'action' => 'logout'), array('escape' => false)); ?></li>
                         </ul>
                         <?php
                         if ($this->request->params['controller'] == 'checklist') : //this form is available only for editing data and checklist

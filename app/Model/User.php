@@ -14,6 +14,8 @@ App::uses('AppModel', 'Model');
  */
 class User extends AppModel {
 
+    public $actsAs = array('Containable');
+    
     public $hasAndBelongsToMany = array(
         'Genera' => array(
             'className' => 'Genus',
