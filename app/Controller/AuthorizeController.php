@@ -3,13 +3,13 @@
 App::uses('AppController', 'Controller');
 App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 
-class UsersController extends AppController {
+class AuthorizeController extends AppController {
 
     public $uses = array('User');
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('login', 'add');
+        $this->Auth->allow('login');
     }
 
     public function login() {
@@ -26,12 +26,7 @@ class UsersController extends AppController {
         return $this->redirect($this->Auth->logout());
     }
 
-    /*
-     * Admin = tester, test
-     * Editor = editor, edit
-     * Author = author, auth
-     */
-    public function add() {
+    private function _add() {
         $user['User'] = array('username' => 'author', 'password' => 'auth', 'name' => 'Author', 'role' => AUTHOR);
         $this->User->save($user);
     }
