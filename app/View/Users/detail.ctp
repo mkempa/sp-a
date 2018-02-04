@@ -25,29 +25,81 @@ $roles = array(ADMIN, EDITOR, AUTHOR);
         </tr>
     </table>
 
+    <h3><?php echo __('Assigned genera'); ?></h3>
     <div class="row">
-        <h3><?php echo __('Assigned genera'); ?></h3>
-
         <div class="col-md-6">
+            <?php
+            echo $this->Form->create(false, array('type' => 'post', 'url' => array(
+                    'controller' => 'users', 'action' => 'remove', Hash::get($record, 'User.id')),
+                'id' => 'user-remove-genera-form',
+                'role' => 'form', 'inputDefaults' => array('label' => false, 'div' => false)));
+            ?>
             <table id="user-assigned-genera" class="table table-bordered table-condensed table-responsive">
-                <?php foreach (Hash::get($record, 'Genera') as $g): ?>
+                <?php if (empty(Hash::get($record, 'Genera'))): ?>
+                    <tr>
+                        <td></td>
+                    </tr>
+                    <?php
+                endif;
+                $i = 0;
+                foreach (Hash::get($record, 'Genera') as $g):
+                    $usersgeneraElId = $i . '-usersgenera-id';
+                    ?>
                     <tr>
                         <td><?php echo Hash::get($g, 'name'); ?></td>
-                        <td></td>
                         <td><?php
-                            echo $this->Html->link('Remove >>', array(
-                                'action' => 'remove',
-                                Hash::get($g, 'UsersGenus.id')
-                                    ), array(
-                                'class' => 'btn btn-danger btn-xs'
+                            echo $this->Form->checkbox('UsersGenera.ids.', array(
+                                'id' => $usersgeneraElId,
+                                'multiple' => 'checkbox',
+                                'value' => Hash::get($g, 'UsersGenus.id'),
+                                'hiddenField' => false));
+                            ?></td>
+                        <td><?php
+                            echo $this->Form->submit('Remove >>', array(
+                                'class' => 'btn btn-danger btn-xs user-remove-genera-btn',
+                                'data-id-usersgenus' => Hash::get($g, 'UsersGenus.id'),
+                                'data-id-usersgenera-el' => $usersgeneraElId
                             ));
                             ?>
+                        </td>
                     </tr>
-                <?php endforeach; ?>
+                    <?php
+                    $i++;
+                endforeach;
+                ?>
             </table>
+            <?php
+            echo $this->Form->submit('Remove selected', array(
+                'id' => 'user-remove-selected-genera-btn pull-right',
+                'class' => 'btn btn-danger'
+            ));
+            echo $this->Form->end();
+            ?>
         </div>
-        <div class="col-md-6">
-            
+        <?php
+        echo $this->Form->create('UsersGenera', array('type' => 'post', 'url' => array(
+                'controller' => 'users', 'action' => 'addgenera', Hash::get($record, 'User.id')),
+            'role' => 'form', 'inputDefaults' => array('label' => false, 'div' => false)));
+        ?>
+
+        <div class="col-md-2 text-center">
+            <?php
+            echo $this->Form->submit('<< Add', array('id' => 'user-add-genera-btn',
+                'class' => 'btn btn-success'));
+            ?>
         </div>
+        <div class="col-md-4">
+            <?php
+            echo $this->Form->input('Genera', array(
+                'id' => 'user-add-genera-list',
+                'multiple' => 'multiple',
+                'type' => 'select',
+                'options' => $unassignedGenera,
+                'div' => false,
+                'label' => false
+            ));
+            ?>
+        </div>
+        <?php $this->Form->end(); ?>
     </div>
 </div>

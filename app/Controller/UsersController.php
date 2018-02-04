@@ -22,11 +22,11 @@ class UsersController extends AppController {
     public $components = array(
         'Eip.Eip'
     );
-    
+
     public function isAuthorized($user) {
         return $user['role'] === ADMIN;
     }
-    
+
     public function index() {
         $this->User->recursive = -1;
         $users = $this->User->find('all');
@@ -41,19 +41,39 @@ class UsersController extends AppController {
         $genera = $this->Genus->listGenera();
         $this->set(compact('genera', 'record'));
     }
-    
-    public function remove($genera = null) {
-        if ($genera == null) {
-            //get array of genera
+
+    public function remove($idUser) {
+        if ($this->request->is('post')) {
+            if ($idUser == null) {
+                throw new InvalidArgumentException("IdUser must not be null!");
+            }
+            $data = $this->request->data;
+            $idsToRemove = array_filter($data['UsersGenera']['ids']);
+            $this->UsersGenera->deleteAll(array('UsersGenera.id' => $idsToRemove), false);
+            $this->redirect(array('action' => 'detail', $idUser));
         }
-        $this->UsersGenera->delete(array('UsersGenera.id' => $genera), false);
-        $this->redirect(array('action' => 'detail'));
     }
-    
+
+    public function addgenera($idUser) {
+        if ($this->request->is('post')) {
+            if ($idUser == null) {
+                throw new InvalidArgumentException("IdUser must not be null!");
+            }
+            $data = $this->request->data;
+            $newEntities = array();
+            foreach ($data['UsersGenera']['Genera'] as $d) {
+                $userGenera = array('UsersGenera' => array('id_user' => $idUser));
+                $userGenera['UsersGenera']['id_genus'] = $d;
+                $newEntities[] = $userGenera;
+            }
+            $this->UsersGenera->saveAll($newEntities);
+            $this->redirect(array('action' => 'detail', $idUser));
+        }
+    }
+
     private function _add() {
         $user['User'] = array('username' => 'author', 'password' => 'auth', 'name' => 'Author', 'role' => AUTHOR);
         $this->User->save($user);
     }
-    
+
 }
- 
