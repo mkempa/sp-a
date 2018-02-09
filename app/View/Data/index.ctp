@@ -1,12 +1,12 @@
 <?php
-
+//new dBug($data[0]);
 ?>
 <div id="functions" class="container">
     <div class="row">
         <div class="col-xs-12">
             <?php
-            $glyph = '<span class="glyphicon glyphicon-plus"></span> ';
-            echo $this->Html->link($glyph . __('Add new'), array('action' => 'insert'), array('class' => 'btn btn-success', 'escape' => false));
+            //$glyph = '<span class="glyphicon glyphicon-plus"></span> ';
+            //echo $this->Html->link($glyph . __('Add new'), array('action' => 'insert'), array('class' => 'btn btn-success', 'escape' => false));
             ?>
         </div>
     </div>

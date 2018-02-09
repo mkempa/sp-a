@@ -14,12 +14,15 @@ App::uses('AppModel', 'Model');
  */
 class User extends AppModel {
 
+    public $actsAs = array('Containable');
+    
     public $hasAndBelongsToMany = array(
         'Genera' => array(
             'className' => 'Genus',
             'joinTable' => 'users_genera',
             'foreignKey' => 'id_user',
             'associationForeignKey' => 'id_genus',
+            'order' => 'Genera.name',
             'unique' => true
         )
     );

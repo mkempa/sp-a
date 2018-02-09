@@ -37,12 +37,16 @@ class AppController extends Controller {
     public $components = array(
         'Flash',
         'Auth' => array(
+            'loginAction' => array(
+                'controller' => 'authorize',
+                'action' => 'login'
+            ),
             'loginRedirect' => array(
                 'controller' => 'data',
                 'action' => 'index'
             ),
             'logoutRedirect' => array(
-                'controller' => 'users',
+                'controller' => 'authorize',
                 'action' => 'login'
             ),
             'authError' => 'You are not authorized to see that',

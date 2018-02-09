@@ -1,5 +1,6 @@
 
 #chrom-data-detail div[class*="col-"] { padding-left: 0; }
+#user-add-genera-list { height: 300px; width: 100%; }
 
 footer { height:50px; }
 
