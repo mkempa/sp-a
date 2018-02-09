@@ -70,8 +70,8 @@ $roles = array(ADMIN, EDITOR, AUTHOR);
             </table>
             <?php
             echo $this->Form->submit('Remove selected', array(
-                'id' => 'user-remove-selected-genera-btn pull-right',
-                'class' => 'btn btn-danger'
+                'id' => 'user-remove-selected-genera-btn',
+                'class' => 'btn btn-danger pull-right'
             ));
             echo $this->Form->end();
             ?>
