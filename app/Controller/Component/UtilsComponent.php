@@ -25,5 +25,19 @@ class UtilsComponent extends Component {
         $filterrecordsDefault = $authUser['role'] === AUTHOR ? 'mine' : 'all';
         return isset($params['filterrecords']) ? $params['filterrecords'] : $filterrecordsDefault;
     }
-
+    
+    public function filterTypes($params) {
+        if (isset($params['types']) && is_array($params['types'])) {
+            return $params['types'];
+        }
+        return array('All' => 'All');
+    }
+    
+    public function filterFreetext($params) {
+        if (!empty($params['freetext'])) {
+            return $params['freetext'];
+        }
+        return '';
+    }
+    
 }

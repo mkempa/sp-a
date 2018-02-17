@@ -1,6 +1,7 @@
 
 #chrom-data-detail div[class*="col-"] { padding-left: 0; }
 #user-add-genera-list { height: 300px; width: 100%; }
+#functions { background-color: #fff; }
 
 footer { height:50px; }
 
@@ -32,3 +33,5 @@ footer { height:50px; }
 ul.normal { list-style: none; padding-left: 0px; }
 .grey, .grey a { color: #aaa; }
 .emph { background-color: #02b702 !important; }
+
+#FilterPreviewForm hr { margin: 0; }

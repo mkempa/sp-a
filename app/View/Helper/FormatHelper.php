@@ -90,6 +90,10 @@ class FormatHelper extends AppHelper {
         return '';
     }
     
+    public function checkOption(array $expected, $actual) {
+        return in_array($actual, $expected);
+    }
+    
     private function _strOrHtml($string, $isHtml = false) {
         if (empty($string)) {
             return $string;

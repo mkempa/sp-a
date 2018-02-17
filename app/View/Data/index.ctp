@@ -1,7 +1,7 @@
 <?php
 //new dBug($data[0]);
 ?>
-<div id="functions" class="container">
+<div id="functions" class="container well">
     <div class="row">
         <div class="col-xs-12">
             <?php
