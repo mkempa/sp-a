@@ -33,4 +33,11 @@ class UtilsComponent extends Component {
         return array('All' => 'All');
     }
     
+    public function filterFreetext($params) {
+        if (!empty($params['freetext'])) {
+            return $params['freetext'];
+        }
+        return '';
+    }
+    
 }

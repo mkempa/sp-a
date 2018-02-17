@@ -39,7 +39,7 @@ class DataController extends AppController {
         $filterrecords = $this->Utils->filterRecords($params);
         $checkedTypes = $this->Utils->filterTypes($params);
         $generaIds = $this->Utils->userGenera($this->User);
-        $freetext = $params['freetext'];
+        $freetext = $this->Utils->filterFreetext($params);
         
         $conditions = array();
         $this->Conditions->ownership($filterrecords, $generaIds, $conditions);
@@ -66,7 +66,7 @@ class DataController extends AppController {
             'Nomenclature.id'
         ));
         
-        $this->set(compact('data', 'filterrecords', 'checkedTypes'));
+        $this->set(compact('data', 'filterrecords', 'checkedTypes', 'freetext'));
     }
 
     public function detail($id) {

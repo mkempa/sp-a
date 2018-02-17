@@ -1,6 +1,8 @@
 
 $(document).ready(function () {
 
+    $('[data-toggle="tooltip"]').tooltip();
+
     /*
      * Checklist data filter
      */
@@ -22,7 +24,14 @@ $(document).ready(function () {
     $("#FilterPreviewForm input.submit-on-click").change(function () {
         $("#FilterPreviewForm").submit();
     });
-
+    $("#FilterPreviewForm-freetext-submit").click(function () {
+        $("#FilterPreviewForm").submit();
+    });
+    $("#FilterPreviewForm-freetext-clear").click(function () {
+        $("#FilterFreetext").val('');
+        $("#FilterPreviewForm").submit();
+    });
+    
     /*
      * User management
      */

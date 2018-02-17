@@ -53,22 +53,21 @@ echo $this->Form->create('Filter', array('type' => 'get', 'url' => array('contro
             </div>
             <?php
         endforeach;
-
-//        echo $this->Form->input('types', array(
-//            'multiple' => 'checkbox',
-//            'options' => $types,
-//            'label' => false,
-//            'hiddenField' => false,
-//            'input' => array('class' => 'submit-on-click'),
-//            'div' => false)
-//        );
         ?>
     </div>
 </div>
 <div class="col-md-6">
-    <?php
-    echo $this->Form->input('freetext', array('class' => 'form-control', 'placeholder' => 'Search'));
-    ?>
+    <div class="input-group">
+        <div class="input-group-btn">
+            <button id="FilterPreviewForm-freetext-clear" class="btn btn-default" title="clear"><i class="glyphicon glyphicon-erase"></i></button>
+        </div>
+        <?php
+        echo $this->Form->input('freetext', array('class' => 'form-control', 'value' => $freetext, 'placeholder' => 'Search'));
+        ?>
+        <div class="input-group-btn">
+            <button id="FilterPreviewForm-freetext-submit" class="btn btn-default" title="search"><i class="glyphicon glyphicon-search"></i></button>
+        </div>
+    </div>
 </div>
 <?php
 echo $this->Form->end();
