@@ -12,11 +12,20 @@
  */
 class ConditionsComponent extends Component {
 
-    public function viewFilter($type, $ids) {
+    public function ownership($type, $ids, &$conditions) {
         if ($type === 'mine') {
-            return array('Nomenclature.id_genus' => $ids);
+            $conditions['Nomenclature.id_genus'] = $ids;
         }
-        return array();
     }
 
+    public function types($types, &$conditions) {
+        if (!in_array('All', $types)) {
+            $conditions['Nomenclature.ntype'] = $types;
+        }
+    }
+
+    public function freetext($text, &$conditions) {
+        
+    }
+    
 }

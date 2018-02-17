@@ -37,7 +37,14 @@ class DataController extends AppController {
     public function index() {
         $params = $this->request->query;
         $filterrecords = $this->Utils->filterRecords($params);
+        $checkedTypes = $this->Utils->filterTypes($params);
         $generaIds = $this->Utils->userGenera($this->User);
+        $freetext = $params['freetext'];
+        
+        $conditions = array();
+        $this->Conditions->ownership($filterrecords, $generaIds, $conditions);
+        $this->Conditions->types($checkedTypes, $conditions);
+        $this->Conditions->freetext($freetext, $conditions);
         
         $this->Paginator->settings = array(
             'Nomenclature' => array(
@@ -48,7 +55,7 @@ class DataController extends AppController {
 //                    'Replaced',
 //                    'ReplacedFor'
                 ),
-                'conditions' => $this->Conditions->viewFilter($filterrecords, $generaIds),
+                'conditions' => $conditions,
                 'limit' => 50,
                 'order' => array(
                     'Nomenclature.id'
@@ -59,7 +66,7 @@ class DataController extends AppController {
             'Nomenclature.id'
         ));
         
-        $this->set(compact('data', 'filterrecords'));
+        $this->set(compact('data', 'filterrecords', 'checkedTypes'));
     }
 
     public function detail($id) {
