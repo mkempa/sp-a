@@ -1,5 +1,5 @@
 <?php
-//new dBug($result);
+//new dBug($genera);
 
 $ntypes = array(
     'A' => 'Accepted',
@@ -202,7 +202,7 @@ foreach ($accepted_list as $key => $val) {
 
     <h3>
         <?php echo __('Nomenclatoric Synonyms'); ?>
-        <small><?php echo __('(Synonyms can be managed only in ') . $this->Html->link('full edit mode', array('action' => 'edit', $result['Nomenclature']['id'], '#' => 'nomenclatoric')) . ')'; ?></small>
+        <small><?php echo __('(Synonyms can be managed only in ') . $this->Html->link('full edit mode', array('action' => 'edit', $result['Nomenclature']['id'])) . ')'; ?></small>
     </h3>
     <table class="table table-condensed table-responsive table-bordered">
         <?php if (empty($result['SynonymsNomenclatoric'])): //show one empty row  ?>
@@ -223,7 +223,7 @@ foreach ($accepted_list as $key => $val) {
 
     <h3>
         <?php echo __('Taxonomic Synonyms'); ?>
-        <small><?php echo __('(Synonyms can be managed only in ') . $this->Html->link('full edit mode', array('action' => 'edit', $result['Nomenclature']['id'], '#' => 'taxonomic')) . ')'; ?></small>
+        <small><?php echo __('(Synonyms can be managed only in ') . $this->Html->link('full edit mode', array('action' => 'edit', $result['Nomenclature']['id'])) . ')'; ?></small>
     </h3>
     <p>
         All associated nomenclatoric synonyms are shown here to see which are associated with each other. Those in grey colour will not be shown on the website.

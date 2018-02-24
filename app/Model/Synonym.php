@@ -13,5 +13,20 @@ App::uses('AppModel', 'Model');
  * @author Matus
  */
 class Synonym extends AppModel {
+
+    public $actsAs = array(
+        'Containable'
+    );
+
+    public $belongsTo = array(
+        'Parent' => array(
+            'className' => 'Nomenclature',
+            'foreignKey' => 'id_parent'
+        ),
+        'SynonymSpecies' => array(
+            'className' => 'Nomenclature',
+            'foreignKey' => 'id_synonym'
+        )
+    );
     
 }

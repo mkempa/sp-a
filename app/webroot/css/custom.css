@@ -2,6 +2,7 @@
 #chrom-data-detail div[class*="col-"] { padding-left: 0; }
 #user-add-genera-list { height: 300px; width: 100%; }
 #functions { background-color: #fff; }
+#FilterPreviewForm hr { margin: 0; }
 
 footer { height:50px; }
 
@@ -13,6 +14,7 @@ footer { height:50px; }
 .glyphicon-remove { color: #ed2d2d; }
 */
 .table { margin-top: 5px; }
+.list-group-item .btn { margin: auto 2px; }
 
 .editable-buttons .glyphicon-ok { color: #fff; }
 .editable-buttons .glyphicon-remove { color: #fff; }
@@ -33,5 +35,3 @@ footer { height:50px; }
 ul.normal { list-style: none; padding-left: 0px; }
 .grey, .grey a { color: #aaa; }
 .emph { background-color: #02b702 !important; }
-
-#FilterPreviewForm hr { margin: 0; }
