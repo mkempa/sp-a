@@ -101,7 +101,10 @@ class DataController extends AppController {
             'order' => $this->Input->orderNomen('SynonymSpecies')
         ));
         $parentId = $id;
-        $synonyms = $this->Nomenclature->listSpecies(array('Nomenclature.ntype' => array('S', 'DS')));
+        $synonyms = $this->Nomenclature->find('all', array(
+            'recursive' => -1,
+            'conditions' => array('Nomenclature.ntype' => array('S', 'DS'))
+        ));
         $this->set(compact('parentId', 'nomenclatoric', 'synonyms', 'taxonomic'));
     }
             

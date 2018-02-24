@@ -1,9 +1,19 @@
 <?php
-//new dBug($nomenclatoric);
+//new dBug($synonyms);
+$synonyms_list = Hash::combine($synonyms, '{n}.Nomenclature.id', '{n}');
+unset($synonyms);
+
+foreach ($synonyms_list as $key => $val) {
+    $l = $this->Format->los($val['Nomenclature']);
+    $synonyms_list[$key] = $l;
+}
+
+asort($synonyms_list);
+echo $this->Form->hidden('synonyms', array('id' => 'synonyms-list', 'value' => json_encode(array_values($synonyms_list))));
 ?>
 <div id="checklist-edit" class="container">
     <h4>Nomenclatoric Synonyms</h4>
-    <ul id="synonyms-nomenclatoric" class="list-group">
+    <ul id="synonyms-nomenclatoric" class="list-group addable">
         <?php if (empty($nomenclatoric)): ?>
             <li class="list-group-item"></li>
             <?php
@@ -29,11 +39,13 @@
                 </span>
             </li>
         <?php endforeach; ?>
-        <li class="list-group-item"><button id="synonyms-nomenclatoric-add" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span></button></li>
+        <li class="list-group-item">
+            <button id="synonyms-nomenclatoric-add" class="btn btn-success btn-sm add-row-btn" data-url="<?php echo $this->Html->url(array('controller' => 'synonyms', 'action' => 'add', 'nomenclatoric', $parentId)); ?>"><span class="glyphicon glyphicon-plus"></span></button>
+        </li>
     </ul>
     
     <h4>Taxonomic Synonyms</h4>
-    <ul id="synonyms-taxonomic" class="list-group">
+    <ul id="synonyms-taxonomic" class="list-group addable">
         <?php if (empty($taxonomic)): ?>
             <li class="list-group-item"></li>
             <?php
@@ -59,6 +71,8 @@
                 </span>
             </li>
         <?php endforeach; ?>
-        <li class="list-group-item"><button id="synonyms-nomenclatoric-add" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span></button></li>
+        <li class="list-group-item">
+            <button id="synonyms-taxonomic-add" class="btn btn-success btn-sm add-row-btn" data-url="<?php echo $this->Html->url(array('controller' => 'synonyms', 'action' => 'add', 'taxonomic', $parentId)); ?>"><span class="glyphicon glyphicon-plus"></span></button>
+        </li>
     </ul>
 </div>

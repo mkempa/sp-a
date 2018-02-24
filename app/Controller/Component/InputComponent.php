@@ -32,4 +32,14 @@ class InputComponent extends Component {
         );
     }
 
+    public function syntype($syntype) {
+        switch ($syntype) {
+            case 'nomenclatoric':
+                return 3;
+            case 'taxonomic':
+                return 2;
+            default:
+                return 2;
+        }
+    }
 }

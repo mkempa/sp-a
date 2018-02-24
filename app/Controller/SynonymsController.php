@@ -16,6 +16,8 @@ class SynonymsController extends AppController {
 
     public $uses = array('Synonym');
     
+    public $components = array('Input');
+    
     public function isAuthorized($user) {
         if ($user['role'] === AUTHOR) {
             $this->set(AUTHORIZED_EDIT, false);
@@ -51,4 +53,23 @@ class SynonymsController extends AppController {
         $this->redirect(array('controller' => 'data', 'action' => 'edit', $idParent));
     }
 
+    public function add($type, $idParent) {
+        if (!$type) {
+            throw new InvalidArgumentException('SynonymsController::add - invalid type');
+        }
+        if ($this->request->is('post')) {
+            $data = $this->request->data;
+            if (empty($data['synonym'])) {
+                throw new InvalidArgumentException('SynonymsController::add - invalid synonym id');
+            }
+            $synonym = $this->Synonym->create();
+            $synonym['Synonym']['id_parent'] = $idParent;
+            $synonym['Synonym']['id_synonym'] = $data['synonym'];
+            $synonym['Synonym']['syntype'] = $this->Input->syntype($type);
+            $synonym['Synonym']['rorder'] = 1;
+            $this->Synonym->save($synonym);
+        }
+        $this->redirect(array('controller' => 'data', 'action' => 'edit', $idParent));
+    }
+    
 }

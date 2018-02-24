@@ -53,4 +53,38 @@ $(document).ready(function () {
             $("#user-remove-selected-genera-btn").prop('disabled', true);
         }
     });
+    
+    /*
+     * Synonyms management
+     */
+    function selectForm(url, options) {
+        var $form = $('<form>').attr('id', 'add-synonym-form').addClass('add-synonym-form').attr('action', url).attr('role', 'form').attr('method', 'post').attr('accept-charset', "utf-8");
+        var $select = $('<select>').addClass('form-control').attr('name', 'synonym');
+        
+//        options = options.sort(function(a, b) {
+//            return 
+//        });
+        $.each(options, function (k, v) {
+            $('<option>').val(k).text(v).appendTo($select);
+        });
+        var $divBtns = $('<div>').addClass('input-group-btn editable-buttons');
+        $('<button>').attr('type', 'submit').addClass('btn btn-primary').append('<span class="glyphicon glyphicon-ok"></span>').appendTo($divBtns);
+        $('<button>').attr('type', 'button').addClass('btn btn-cancel').append('<span class="glyphicon glyphicon-remove"></span>').appendTo($divBtns);
+        $('<div>').addClass('input-group').append($select).append($divBtns).appendTo($form);
+        return $form;
+    }
+    
+    $(".addable").on('click', 'form.add-synonym-form button.btn-cancel', function() {
+        $(this).closest('ul.list-group').find('li:last-child button').prop('disabled', false);
+        $(this).closest('li.list-group-item').remove();
+    });
+     
+    $("#checklist-edit button.add-row-btn").click(function () {
+        var $li = $('<li>').addClass('list-group-item');
+        var synonymsList = $('#synonyms-list').val();
+        var $selectForm = selectForm($(this).data('url'), JSON.parse(synonymsList));
+        $li.append($selectForm);
+        $(this).parent('li.list-group-item').prev().after($li);
+        $(this).prop('disabled', true);
+    });
 });
