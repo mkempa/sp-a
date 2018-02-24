@@ -43,10 +43,12 @@ class SynonymsController extends AppController {
         $this->redirect(array('controller' => 'data', 'action' => 'edit', $idParent));
     }
 
-    public function remove($id) {
+    public function remove($id, $idParent) {
         if (!$id) {
             throw new InvalidArgumentException('SynonymsController::remove - invalid id');
         }
+        $this->Synonym->delete($id);
+        $this->redirect(array('controller' => 'data', 'action' => 'edit', $idParent));
     }
 
 }

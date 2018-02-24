@@ -20,7 +20,7 @@
                         'class' => 'btn btn-default btn-xs', 
                         'title' => 'Make this a taxonomic synonym',
                         'escape' => false)); 
-                    echo $this->Html->link('<span class="glyphicon glyphicon-remove"></span>', array('controller' => 'synonyms', 'action' => 'remove', $id), array(
+                    echo $this->Html->link('<span class="glyphicon glyphicon-remove"></span>', array('controller' => 'synonyms', 'action' => 'remove', $id, $parentId), array(
                         'class' => 'btn btn-danger btn-xs', 
                         'title' => 'Remove',
                         'escape' => false
@@ -50,7 +50,7 @@
                         'class' => 'btn btn-default btn-xs', 
                         'title' => 'Make this a nomenclatoric synonym',
                         'escape' => false)); 
-                    echo $this->Html->link('<span class="glyphicon glyphicon-remove"></span>', array('controller' => 'synonyms', 'action' => 'remove', $id), array(
+                    echo $this->Html->link('<span class="glyphicon glyphicon-remove"></span>', array('controller' => 'synonyms', 'action' => 'remove', $id, $parentId), array(
                         'class' => 'btn btn-danger btn-xs', 
                         'title' => 'Remove',
                         'escape' => false
