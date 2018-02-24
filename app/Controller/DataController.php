@@ -14,7 +14,7 @@ App::uses('AppController', 'Controller');
  */
 class DataController extends AppController {
 
-    public $uses = array('Family', 'FamilyApg', 'Genus', 'Nomenclature', 'User');
+    public $uses = array('Family', 'FamilyApg', 'Genus', 'Nomenclature', 'Synonym', 'User');
     public $helpers = array(
         'Paginator',
         'Eip.Eip',
@@ -23,6 +23,7 @@ class DataController extends AppController {
     public $components = array(
         'Paginator',
         'Eip.Eip',
+        'Input',
         'Conditions',
         'Utils'
     );
@@ -83,4 +84,29 @@ class DataController extends AppController {
         $this->set(compact('accepted', 'families', 'familiesApg', 'genera', 'loss', 'result'));
     }
 
+    public function edit($id) {
+        if (!$id) {
+            throw new InvalidArgumentException('ChecklistsController::edit - invalid id');
+        }
+        ini_set('memory_limit', '512M');
+        //$result = $this->Nomenclature->getDetail($id);
+        $nomenclatoric = $this->Synonym->find('all', array(
+            'contain' => array('SynonymSpecies'),
+            'conditions' => array('Synonym.id_parent' => $id, 'Synonym.syntype' => 3),
+            'order' => $this->Input->orderNomen('SynonymSpecies')
+        ));
+        $taxonomic = $this->Synonym->find('all', array(
+            'contain' => array('SynonymSpecies'),
+            'conditions' => array('Synonym.id_parent' => $id, 'Synonym.syntype' => 2),
+            'order' => $this->Input->orderNomen('SynonymSpecies')
+        ));
+        $parentId = $id;
+        $synonyms = $this->Nomenclature->find('all', array(
+            'recursive' => -1,
+            'conditions' => array('Nomenclature.ntype' => array('S', 'DS'))
+        ));
+        $this->set(compact('parentId', 'nomenclatoric', 'synonyms', 'taxonomic'));
+    }
+            
+    
 }
