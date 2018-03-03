@@ -20,7 +20,8 @@ class UsersController extends AppController {
         'Edit'
     );
     public $components = array(
-        'Eip.Eip'
+        'Eip.Eip',
+        'Exception'
     );
 
     public function isAuthorized($user) {
@@ -71,9 +72,16 @@ class UsersController extends AppController {
         }
     }
 
-    private function _add() {
-        $user['User'] = array('username' => 'author', 'password' => 'auth', 'name' => 'Author', 'role' => AUTHOR);
-        $this->User->save($user);
+    public function add() {
+        if ($this->request->is('post')) {
+            $data = $this->request->data;
+            try {
+                $this->User->save($data);
+                $this->redirect(array('action' => 'index'));
+            } catch (PDOException $e) {
+                $this->Exception->handlePDOException($e, 'username', $data['User']['username']);
+            }
+        }
     }
 
 }

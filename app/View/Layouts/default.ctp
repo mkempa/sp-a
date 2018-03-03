@@ -92,7 +92,11 @@
             <?php
         endif;
         ?>
-
+        <div class="container">
+            <div id="flash-messages">
+                <?php echo $this->Flash->render(); ?>
+            </div>
+        </div>
         <?php echo $this->fetch('content'); ?>
 
         <footer>

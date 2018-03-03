@@ -31,6 +31,7 @@ footer { height:50px; }
 .clickable a { display: inline-block; width: 100%; }
 
 .table-bordered-outline { border: 1px solid #ddd; }
+.submit-panel { margin-top: 40px; }
 
 ul.normal { list-style: none; padding-left: 0px; }
 .grey, .grey a { color: #aaa; }
