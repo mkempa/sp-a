@@ -12,9 +12,16 @@
  */
 class EditHelper extends AppHelper {
 
-    public $helpers = array('Eip.Eip');
+    public $helpers = array('Eip.Eip', 'Form');
 
-    public function eipInput($data, $path, $options = array()) {
+    public function eipInput($data, $path, $options = array(), $isEip = true) {
+        if ($isEip) {
+            return $this->createEipInput($data, $path, $options);
+        }
+        return $this->createFormInput($path, $options);
+    }
+    
+    private function createEipInput($data, $path, $options = array()) {
         $defaults = array(
             'editable' => true,
             'isBool' => false
@@ -32,6 +39,26 @@ class EditHelper extends AppHelper {
         //get rid of custom options
         $this->_unsetAll($options, array_keys($defaults));
         return $this->Eip->input($path, $data, $options);
+    }
+    
+    private function createFormInput($path, $options = array()) {
+        $defaults = array(
+            'type' => 'text',
+            'class' => 'form-control'
+        );
+        $options = array_merge($defaults, (array) $options);
+        $this->_fixSelectOptions($options);
+        return $this->Form->input($path, $options);
+    }
+    
+    private function _fixSelectOptions(&$options) {
+        if (isset($options['source'])) {
+            $options['options'] = $options['source'];
+            unset($options['source']);
+        }
+        if (!isset($options['empty'])) {
+            $options['empty'] = true;
+        }
     }
     
     private function _string($val) {
