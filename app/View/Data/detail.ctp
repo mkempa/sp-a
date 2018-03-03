@@ -1,5 +1,5 @@
 <?php
-//new dBug($genera);
+//new dBug($result);
 
 $ntypes = array(
     'A' => 'Accepted',
@@ -149,6 +149,34 @@ foreach ($accepted_list as $key => $val) {
         <tr>
             <td class="col-xs-4"><?php echo __('Is isonym'); ?></td>
             <td><?php echo $this->Edit->eipInput($result, 'Nomenclature.is_isonym', array('editable' => $authorizedEdit, 'isBool' => true, 'valTrue' => 'True', 'valFalse' => 'False')); ?> </td>
+        </tr>
+    </table>
+    
+    <h3><?php echo __('Status'); ?></h3>
+    <table class="table table-bordered table-condensed table-responsive">
+        <tr>
+            <td class="col-xs-4"><?php echo __('Allochthonous'); ?></td>
+            <td><?php echo $this->Edit->eipInput($result, 'NomenStatus.allochthonous', array('editable' => $authorizedEdit)); ?> </td>
+        </tr>
+        <tr>
+            <td class="col-xs-4"><?php echo __('Invasiveness'); ?></td>
+            <td><?php echo $this->Edit->eipInput($result, 'NomenStatus.invasiveness', array('editable' => $authorizedEdit)); ?> </td>
+        </tr>
+        <tr>
+            <td class="col-xs-4"><?php echo __('Cultivation'); ?></td>
+            <td><?php echo $this->Edit->eipInput($result, 'NomenStatus.cultivation', array('editable' => $authorizedEdit)); ?> </td>
+        </tr>
+        <tr>
+            <td class="col-xs-4"><?php echo __('Protection'); ?></td>
+            <td><?php echo $this->Edit->eipInput($result, 'NomenStatus.protection', array('editable' => $authorizedEdit)); ?> </td>
+        </tr>
+        <tr>
+            <td class="col-xs-4"><?php echo __('Endemism'); ?></td>
+            <td><?php echo $this->Edit->eipInput($result, 'NomenStatus.endemism', array('editable' => $authorizedEdit)); ?> </td>
+        </tr>
+        <tr>
+            <td class="col-xs-4"><?php echo __('Doubtfullness'); ?></td>
+            <td><?php echo $this->Edit->eipInput($result, 'NomenStatus.doubtfullness', array('editable' => $authorizedEdit)); ?> </td>
         </tr>
     </table>
 

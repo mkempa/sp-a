@@ -50,7 +50,7 @@ class DataController extends AppController {
         $this->Paginator->settings = array(
             'Nomenclature' => array(
                 'contain' => array(
-                    'Accepted',
+                    'Accepted'
 //                    'Basionym',
 //                    'BasionymFor',
 //                    'Replaced',
@@ -63,9 +63,7 @@ class DataController extends AppController {
                 )
             )
         );
-        $data = $this->Paginator->paginate('Nomenclature', array(), array(
-            'Nomenclature.id'
-        ));
+        $data = $this->Paginator->paginate('Nomenclature');
         
         $this->set(compact('data', 'filterrecords', 'checkedTypes', 'freetext'));
     }

@@ -157,6 +157,7 @@ class Nomenclature extends AppModel {
                             'Family',
                             'FamilyApg'
                         ),
+                        'NomenStatus',
                         'Accepted',
                         'Basionym',
                         'BasionymFor',
