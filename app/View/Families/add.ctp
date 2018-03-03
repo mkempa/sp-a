@@ -27,7 +27,7 @@
         </div>
         <div class="col-md-1 col-xs-6">
             <?php
-            echo $this->Html->link(__('Cancel'), '/users/index', array(
+            echo $this->Html->link(__('Cancel'), '/families/index', array(
                 'class' => 'btn btn-default'
             ));
             ?>
