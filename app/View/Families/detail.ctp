@@ -5,14 +5,16 @@
     <div id="table-container">
         <?php
         $backRecord = !empty($this->request->params['named']['record']) ? $this->request->params['named']['record'] : '';
+        $backUrl = array('controller' => 'genera', 'action' => 'index');
         if (!empty($this->request->params['named']['genus'])) {
-            echo $this->Html->link('<< Back', array(
+            $backUrl = array(
                 'controller' => 'genera',
                 'action' => 'detail',
                 $this->request->params['named']['genus'],
                 'record' => $backRecord
-                    ), array('class' => 'btn btn-primary'));
+            );
         }
+        echo $this->Html->link('<< Back', $backUrl, array('class' => 'btn btn-primary'));
         ?>
         <table class="table table-striped table-bordered table-condensed table-responsive">
             <tr>

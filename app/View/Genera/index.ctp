@@ -3,12 +3,13 @@
     <h2><?php echo __('Genera'); ?></h2>
     <div id="functions-bar" class="row">
         <div class="col-md-1">
-            <?php 
+            <?php
             $span = '<span class="glyphicon glyphicon-plus"></span>';
-            echo $this->Html->link("$span add", '/genera/add', array('class' => 'btn btn-success btn-sm', 'escape' => false)); ?>
+            echo $this->Html->link("$span add", '/genera/add', array('class' => 'btn btn-success btn-sm', 'escape' => false));
+            ?>
         </div>
     </div>
-    
+
     <div class="row text-center text-primary">
         <?php
         echo $this->Paginator->counter(
@@ -35,8 +36,7 @@
                 <th><?php echo __('Family'); ?></th>
             </tr>
 
-            <?php
-            foreach ($data as $d) : ?>
+            <?php foreach ($data as $d) : ?>
                 <tr>
                     <td><?php echo Hash::get($d, 'Genus.id'); ?></td>
                     <td><?php echo $this->Edit->eipInput($d, 'Genus.name', array('editable' => $authorizedEdit)); ?></td>
@@ -51,9 +51,8 @@
                             'viewSelect' => true,
                             'viewUrl' => $this->Html->url(array(
                                 'controller' => 'familiesApg',
-                                'action' => 'index',
-                                'id' => Hash::get($d, 'Genus.id_family_apg'),
-                                'parent' => Hash::get($d, 'Genus.id')
+                                'action' => 'detail',
+                                Hash::get($d, 'Genus.id_family_apg')
                                     )
                         )));
                         ?></td>
@@ -64,7 +63,12 @@
                             'source' => $families,
                             'display' => Hash::get($d, 'Family.name'),
                             'viewSelect' => true,
-                            'viewUrl' => $this->Html->url("/families/index/" . Hash::get($d, 'Genus.id_family'))
+                            'viewUrl' => $this->Html->url(array(
+                                'controller' => 'families',
+                                'action' => 'detail',
+                                Hash::get($d, 'Genus.id_family')
+                                    )
+                            )
                         ));
                         ?></td>
                 </tr>
