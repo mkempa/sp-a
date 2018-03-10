@@ -7,6 +7,7 @@
  */
 
 App::uses('AppModel', 'Model');
+App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 
 /**
  * CakePHP User
@@ -15,7 +16,6 @@ App::uses('AppModel', 'Model');
 class User extends AppModel {
 
     public $actsAs = array('Containable');
-    
     public $hasAndBelongsToMany = array(
         'Genera' => array(
             'className' => 'Genus',
@@ -28,6 +28,7 @@ class User extends AppModel {
     );
 
     public function beforeSave($options = array()) {
+        parent::beforeSave();
         if (isset($this->data[$this->alias]['password'])) {
             $passwordHasher = new BlowfishPasswordHasher();
             $this->data[$this->alias]['password'] = $passwordHasher->hash(

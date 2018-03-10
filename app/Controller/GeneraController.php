@@ -34,13 +34,13 @@ class GeneraController extends AppController {
             'Genus' => array(
                 'limit' => 50,
                 'order' => array(
+                    'Genus.name',
+                    'Genus.authors',
                     'Genus.id'
                 )
             )
         );
-        $data = $this->Paginator->paginate('Genus', array(), array(
-            'Genus.id'
-        ));
+        $data = $this->Paginator->paginate('Genus');
         $familiesApg = $this->FamilyApg->listFamilies();
         $families = $this->Family->listFamilies();
         $this->set(compact('data', 'families', 'familiesApg'));
@@ -60,6 +60,17 @@ class GeneraController extends AppController {
         $familiesApg = $this->FamilyApg->listFamilies();
         $families = $this->Family->listFamilies();
         $this->set(compact('result', 'families', 'familiesApg'));
+    }
+    
+    public function add() {
+        if ($this->request->is('post')) {
+            $data = $this->request->data;
+            $this->Genus->save($data);
+            $this->redirect(array('action' => 'index'));
+        }
+        $familiesApg = $this->FamilyApg->listFamilies();
+        $families = $this->Family->listFamilies();
+        $this->set(compact('familiesApg', 'families'));
     }
     
 }

@@ -61,9 +61,6 @@ $(document).ready(function () {
         var $form = $('<form>').attr('id', 'add-synonym-form').addClass('add-synonym-form').attr('action', url).attr('role', 'form').attr('method', 'post').attr('accept-charset', "utf-8");
         var $select = $('<select>').addClass('form-control').attr('name', 'synonym');
         
-//        options = options.sort(function(a, b) {
-//            return 
-//        });
         $.each(options, function (k, v) {
             $('<option>').val(k).text(v).appendTo($select);
         });

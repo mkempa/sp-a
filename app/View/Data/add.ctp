@@ -1,10 +1,10 @@
 <?php
 
 echo $this->element('record-view-edit', array(
-    'result' => $result,
+    'result' => array(),
     'list_of_species' => $loss,
     'accepted' => $accepted,
     'genera' => $genera,
-    'edit' => true
+    'edit' => false
         )
 );

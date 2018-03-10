@@ -40,4 +40,12 @@ class FamiliesController extends AppController {
         $this->set(compact('result'));
     }
     
+    public function add() {
+        if ($this->request->is('post')) {
+            $data = $this->request->data;
+            $this->Family->save($data);
+            $this->redirect(array('action' => 'index'));
+        }
+    }
+    
 }

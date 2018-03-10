@@ -1,12 +1,19 @@
 <div class="container-fluid">
     <h2><?php echo __('Edit Genus'); ?></h2>
+    <div id="functions-bar" class="row">
+        <div class="col-md-1">
+            <?php
+            $recordBack = !empty($this->request->params['named']['record']) ? $this->request->params['named']['record'] : '';
+            if (!empty($recordBack)) {
+                echo $this->Html->link('<< Back', array('controller' => 'data', 'action' => 'detail', $this->request->params['named']['record']), array('class' => 'btn btn-primary'));
+            }
+            ?>
+        </div>
+        <div class="col-md-1">
+            <?php echo $this->Html->link('<span class="glyphicon glyphicon-chevron-up"></span> View all genera', '/genera/index', array('class' => 'btn btn-default', 'escape' => false)); ?>
+        </div>
+    </div>
     <div id="table-container">
-        <?php
-        $recordBack = !empty($this->request->params['named']['record']) ? $this->request->params['named']['record'] : '';
-        if (!empty($recordBack)) {
-            echo $this->Html->link('<< Back', array('controller' => 'data', 'action' => 'detail', $this->request->params['named']['record']), array('class' => 'btn btn-primary'));
-        }
-        ?>
         <table class="table table-striped table-bordered table-condensed table-responsive">
             <tr>
                 <th>ID</th>

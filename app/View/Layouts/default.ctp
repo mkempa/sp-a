@@ -92,12 +92,16 @@
             <?php
         endif;
         ?>
-
+        <div class="container">
+            <div id="flash-messages">
+                <?php echo $this->Flash->render(); ?>
+            </div>
+        </div>
         <?php echo $this->fetch('content'); ?>
 
         <footer>
             <?php
-            //echo $this->element('sql_dump');
+//            echo $this->element('sql_dump');
             ?>
         </footer>
     </body>

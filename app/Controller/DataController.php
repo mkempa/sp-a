@@ -50,7 +50,7 @@ class DataController extends AppController {
         $this->Paginator->settings = array(
             'Nomenclature' => array(
                 'contain' => array(
-                    'Accepted',
+                    'Accepted'
 //                    'Basionym',
 //                    'BasionymFor',
 //                    'Replaced',
@@ -63,9 +63,7 @@ class DataController extends AppController {
                 )
             )
         );
-        $data = $this->Paginator->paginate('Nomenclature', array(), array(
-            'Nomenclature.id'
-        ));
+        $data = $this->Paginator->paginate('Nomenclature');
         
         $this->set(compact('data', 'filterrecords', 'checkedTypes', 'freetext'));
     }
@@ -74,14 +72,28 @@ class DataController extends AppController {
         if (!$id) {
             throw new InvalidArgumentException('ChecklistsController::detail - invalid id');
         }
-        ini_set('memory_limit', '256M');
+        ini_set('memory_limit', '512M');
         $result = $this->Nomenclature->getDetail($id);
         $accepted = $this->Nomenclature->listSpecies(array('ntype' => array('A', 'PA')));
         $loss = $this->Nomenclature->listSpecies();
         $genera = $this->Genus->listGenera();
-        $familiesApg = $this->Family->listFamilies();
-        $families = $this->FamilyApg->listFamilies();
-        $this->set(compact('accepted', 'families', 'familiesApg', 'genera', 'loss', 'result'));
+//        $familiesApg = $this->Family->listFamilies();
+//        $families = $this->FamilyApg->listFamilies();
+//        $this->set(compact('accepted', 'families', 'familiesApg', 'genera', 'loss', 'result'));
+        $this->set(compact('accepted', 'genera', 'loss', 'result'));
+    }
+    
+    public function add() {
+        if ($this->request->is('post')) {
+            $data = $this->request->data;
+            $this->Nomenclature->saveAssociated($data);
+            $this->redirect(array('action' => 'index'));
+        }
+        ini_set('memory_limit', '256M');
+        $accepted = $this->Nomenclature->listSpecies(array('ntype' => array('A', 'PA')));
+        $loss = $this->Nomenclature->listSpecies();
+        $genera = $this->Genus->listGenera();
+        $this->set(compact('accepted', 'genera', 'loss'));
     }
 
     public function edit($id) {
