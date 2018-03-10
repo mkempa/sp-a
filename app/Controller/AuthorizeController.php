@@ -9,6 +9,10 @@ class AuthorizeController extends AppController {
         parent::beforeFilter();
         $this->Auth->allow('login');
     }
+    
+    public function isAuthorized($user) {
+        return true;
+    }
 
     public function login() {
         if ($this->request->is('post')) {

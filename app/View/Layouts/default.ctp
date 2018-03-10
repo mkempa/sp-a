@@ -65,7 +65,7 @@
                             <li<?php echo $ctrl == 'families' ? $active : ''; ?>><?php echo $this->Html->link(__('Families'), array('controller' => 'families', 'action' => 'index')); ?></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <?php if ($authorizedEdit === true): ?>
+                            <?php if ($logged['role'] === ADMIN): ?>
                                 <li><?php echo $this->Html->link(__('Users'), array('controller' => 'users', 'action' => 'index')); ?></li>
                             <?php endif; ?>
                             <li><?php echo $this->Html->link($logged['name'], array('#')); ?></li>

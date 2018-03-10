@@ -27,10 +27,15 @@ class DataController extends AppController {
         'Conditions',
         'Utils'
     );
+    
+    private $restricted = array('add', 'edit');
 
     public function isAuthorized($user) {
         if ($user['role'] === AUTHOR) {
             $this->set(AUTHORIZED_EDIT, false);
+            if (in_array($this->action, $this->restricted)) {
+                return false;
+            }
         }
         return true;
     }

@@ -29,6 +29,18 @@ class GeneraController extends AppController {
         'Utils'
     );
     
+    private $restricted = array('detail', 'add');
+    
+    public function isAuthorized($user) {
+        if ($user['role'] === AUTHOR) {
+            $this->set(AUTHORIZED_EDIT, false);
+            if (in_array($this->action, $this->restricted)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
     public function index() {
         $this->Paginator->settings = array(
             'Genus' => array(
