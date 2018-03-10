@@ -1,6 +1,8 @@
 <h3>
     <?php echo __('Nomenclatoric Synonyms'); ?>
-    <small><?php echo __('(Synonyms can be managed only in ') . $this->Html->link('full edit mode', array('action' => 'edit', Hash::get($result, 'Nomenclature.id'))) . ')'; ?></small>
+    <?php if ($authorizedEdit): ?>
+        <small><?php echo __('(Synonyms can be managed only in ') . $this->Html->link('full edit mode', array('action' => 'edit', Hash::get($result, 'Nomenclature.id'))) . ')'; ?></small>
+    <?php endif; ?>
 </h3>
 <table class="table table-condensed table-responsive table-bordered">
     <?php if (empty($result['SynonymsNomenclatoric'])): //show one empty row    ?>
@@ -21,7 +23,9 @@
 
 <h3>
     <?php echo __('Taxonomic Synonyms'); ?>
-    <small><?php echo __('(Synonyms can be managed only in ') . $this->Html->link('full edit mode', array('action' => 'edit', Hash::get($result, 'Nomenclature.id'))) . ')'; ?></small>
+    <?php if ($authorizedEdit): ?>
+        <small><?php echo __('(Synonyms can be managed only in ') . $this->Html->link('full edit mode', array('action' => 'edit', Hash::get($result, 'Nomenclature.id'))) . ')'; ?></small>
+    <?php endif; ?>
 </h3>
 <p>
     All associated nomenclatoric synonyms are shown here to see which are associated with each other. Those in grey colour will not be shown on the website.

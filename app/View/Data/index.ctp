@@ -21,12 +21,14 @@
     </div>
 </div>
 <div class="row text-center">
-    <div class="col-md-1">
-        <?php
-        $span = '<span class="glyphicon glyphicon-plus"></span>';
-        echo $this->Html->link("$span add", '/data/add', array('class' => 'btn btn-success btn-sm', 'escape' => false));
-        ?>
-    </div>
+    <?php if ($authorizedEdit): ?>
+        <div class="col-md-1">
+            <?php
+            $span = '<span class="glyphicon glyphicon-plus"></span>';
+            echo $this->Html->link("$span add", '/data/add', array('class' => 'btn btn-success btn-sm', 'escape' => false));
+            ?>
+        </div>
+    <?php endif; ?>
     <div class="col-md-10 text-center text-primary">
         <ul class="pagination">
             <?php echo $this->Paginator->prev('< Prev', array('tag' => 'li', 'class' => false), null, array('disabledTag' => 'a', 'class' => 'disabled')); ?>
@@ -39,7 +41,6 @@
     <table class="table table-striped table-bordered table-condensed table-responsive">
         <tr>
             <th>ID</th>
-            <th><?php echo __('Action'); ?></th>
             <th><?php echo __('Type'); ?></th>
             <th><?php echo __('Name'); ?></th>
             <th><?php echo __('Publication'); ?></th>
@@ -52,7 +53,6 @@
             ?>
             <tr>
                 <td><?php echo $this->Html->link($d['Nomenclature']['id'], array('action' => 'detail', $d['Nomenclature']['id']), array('title' => __('View'))); ?></td>
-                <td><?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $d['Nomenclature']['id']), array('title' => __('Edit'))); ?></td>
                 <td><?php echo Hash::get($d, 'Nomenclature.ntype', '-'); ?></td>
                 <td><?php
                     $name = $this->Format->los(Hash::get($d, 'Nomenclature'), array('publication' => false, 'special' => $is_isonym));

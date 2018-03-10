@@ -5,11 +5,14 @@
 <div class="container-fluid">
     <h2><?php echo __('Family APG4'); ?></h2>
     <div id="functions-bar" class="row">
-        <div class="col-md-1">
-            <?php 
-            $span = '<span class="glyphicon glyphicon-plus"></span>';
-            echo $this->Html->link("$span add", '/familiesApg/add', array('class' => 'btn btn-success btn-sm', 'escape' => false)); ?>
-        </div>
+        <?php if ($authorizedEdit): ?>
+            <div class="col-md-1">
+                <?php
+                $span = '<span class="glyphicon glyphicon-plus"></span>';
+                echo $this->Html->link("$span add", '/familiesApg/add', array('class' => 'btn btn-success btn-sm', 'escape' => false));
+                ?>
+            </div>
+        <?php endif; ?>
     </div>
     <div id="table-container">
         <table class="table table-striped table-bordered table-condensed table-responsive">

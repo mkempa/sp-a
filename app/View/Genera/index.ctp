@@ -2,12 +2,14 @@
 <div class="container-fluid">
     <h2><?php echo __('Genera'); ?></h2>
     <div id="functions-bar" class="row">
-        <div class="col-md-1">
-            <?php
-            $span = '<span class="glyphicon glyphicon-plus"></span>';
-            echo $this->Html->link("$span add", '/genera/add', array('class' => 'btn btn-success btn-sm', 'escape' => false));
-            ?>
-        </div>
+        <?php if ($authorizedEdit): ?>
+            <div class="col-md-1">
+                <?php
+                $span = '<span class="glyphicon glyphicon-plus"></span>';
+                echo $this->Html->link("$span add", '/genera/add', array('class' => 'btn btn-success btn-sm', 'escape' => false));
+                ?>
+            </div>
+        <?php endif; ?>
     </div>
 
     <div class="row text-center text-primary">
